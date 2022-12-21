@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    
+    <head>
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width">
+        <title>ENCRIPTADOR</title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+
+        
+        <main>
+            <div class="logo">
+                <h1>S</h1>
+            </div>
+            <section class="CuadroEntrada">
+                <textarea  id="entrada-texto"  required data-=""> Ingrese el texto aqui </textarea>
+            </section>
+             
+           <section class="cuadro-resultado">
+                <textarea name="resultado" id="resultado" cols="30" rows="10" ></textarea>
+                <img src="imagenes/muneco2.jpg" class="muneco" id="muneco">
+            
+           </section>
+            
+            <div class="botones">
+                <button id="encriptado"><p>Encriptar</p> </button>
+
+                <button id="desencriptado"><p>Desencriptar</p></button>
+
+                <button id="copiar"><p>Copiar</p></button>
+             </div>
+     
+        </main>
+        
+        <footer>
+            
+        </footer>
+        <script>
+            function ENCRIPTAR(){
+                
+                var texto = document.getElementById("entrada-texto").value;
+                texto=texto.toLowerCase();
+                var textoSeparado=texto.split('');
+                var textoCaracteres= textoSeparado.length;
+
+                for(var x=0;x<textoCaracteres;x++){
+                    if(textoSeparado[x]== "a"){ textoSeparado[x]="ai" }
+                    if(textoSeparado[x]== "e"){ textoSeparado[x]="enter" }
+                    if(textoSeparado[x]== "i"){ textoSeparado[x]="imes" }
+                    if(textoSeparado[x]== "o"){ textoSeparado[x]="ober" }
+                    if(textoSeparado[x]== "u"){ textoSeparado[x]="ufat" }
+                }
+                var juntarTexto= textoSeparado.join('');
+                var textoFinal= juntarTexto.toString();
+                document.getElementById("resultado").value=textoFinal;
+                document.getElementById("entrada-texto").value="";
+
+                //var imagen= document.getElementById("muneco");
+                //imagen.src="";
+                document.getElementById("muneco").src="";
+                
+                
+                
+                
+            } 
+            function DESENCRIPTAR(){ 
+                document.getElementById("resultado").value="";
+                var textoCifrado= document.getElementById("entrada-texto").value;
+                textoCifrado= textoCifrado.toLowerCase();
+                var textoCaracteres= textoCifrado.length;
+
+                var textoSinOber =textoCifrado.replaceAll("ober","o");
+                var textoSinAi=textoSinOber.replaceAll("ai","a");
+                var textoSinEnter=textoSinAi.replaceAll("enter","e");
+                var textoSinImes=textoSinEnter.replaceAll("imes","i");
+                var textoDesencriptado=textoSinImes.replaceAll("ufat","u");
+                
+                document.getElementById("resultado").value=textoDesencriptado
+               
+                
+            }
+            function copiaTexto() {
+                textoCopiado= document.getElementById("resultado").value;
+                document.getElementById("resultado").value="";
+                document.getElementById("entrada-texto").value=textoCopiado;
+
+            }
+            
+
+            encriptado.onclick=ENCRIPTAR;
+            desencriptado.onclick=DESENCRIPTAR;
+            copiar.onclick=copiaTexto;
+            
+            
+            
+        </script>
+    </body>
+</html>
+
+
